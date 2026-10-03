@@ -83,6 +83,25 @@ function createInfoContent(place) {
   return box;
 }
 
+function createButton(label, onClick) {
+  const button = document.createElement('button');
+
+  button.type = 'button';
+  button.textContent = label;
+  button.addEventListener('click', onClick);
+
+  return button;
+}
+
+function scrollToMap(mapElement) {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  mapElement.scrollIntoView({
+    behavior: reduceMotion ? 'auto' : 'smooth',
+    block: 'center'
+  });
+}
+
 function showMapError(mapElement, error) {
   const message = document.createElement('p');
 
@@ -98,12 +117,14 @@ async function buildMap(mapElement, places) {
     throw new Error('the Google Maps script did not load');
   }
 
-  const [mapsLibrary, markerLibrary] = await Promise.all([
+  const [mapsLibrary, markerLibrary, coreLibrary] = await Promise.all([
     google.maps.importLibrary('maps'),
-    google.maps.importLibrary('marker')
+    google.maps.importLibrary('marker'),
+    google.maps.importLibrary('core')
   ]);
   const { Map, InfoWindow, Circle } = mapsLibrary;
   const { AdvancedMarkerElement, PinElement } = markerLibrary;
+  const { LatLngBounds } = coreLibrary;
 
   // Remove the "map appears here" message before Google draws the map
   mapElement.textContent = '';
@@ -119,6 +140,7 @@ async function buildMap(mapElement, places) {
   });
 
   const infoWindow = new InfoWindow();
+  const allPlacesBounds = new LatLngBounds();
 
   // Open the info window for a place and highlight it in the list
   function selectPlace(place) {
@@ -128,6 +150,18 @@ async function buildMap(mapElement, places) {
     places.forEach((otherPlace) => {
       otherPlace.item.classList.toggle('is-active', otherPlace === place);
     });
+  }
+
+  // Move the map to a place: the whole circle for an area, or zoom in on a point
+  function goToPlace(place) {
+    if (place.circle) {
+      map.fitBounds(place.circle.getBounds());
+    } else {
+      map.setZoom(place.zoom);
+      map.panTo(place.position);
+    }
+
+    selectPlace(place);
   }
 
   places.forEach((place) => {
@@ -147,6 +181,7 @@ async function buildMap(mapElement, places) {
       gmpClickable: true
     });
     place.marker.append(pin);
+    allPlacesBounds.extend(place.position);
 
     // Feature 2: info window on click, tap, or Enter key
     place.marker.addEventListener('gmp-click', () => {
@@ -165,8 +200,31 @@ async function buildMap(mapElement, places) {
         strokeColor: MAP_COLORS.area,
         strokeWeight: 2
       });
+      allPlacesBounds.union(place.circle.getBounds());
     }
+
+    // Feature 4: a "Show on map" button for each place in the list
+    const showButton = createButton('Show on map', () => {
+      goToPlace(place);
+      scrollToMap(mapElement);
+    });
+
+    showButton.setAttribute('aria-label', `Show ${place.name} on the map`);
+    place.item.append(showButton);
   });
+
+  // Feature 4 (continued): zoom out to fit every place
+  const actions = document.createElement('p');
+
+  actions.className = 'map-actions';
+  actions.append(createButton('Show all places', () => {
+    infoWindow.close();
+    places.forEach((place) => {
+      place.item.classList.remove('is-active');
+    });
+    map.fitBounds(allPlacesBounds);
+  }));
+  mapElement.after(actions);
 
   return map;
 }
