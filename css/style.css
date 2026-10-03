@@ -1,0 +1,349 @@
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: #f4f1f8;
+  color: #211c2b;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+h1,
+h2,
+h3,
+nav {
+  font-family: "Chakra Petch", "Trebuchet MS", sans-serif;
+}
+
+h1 {
+  color: #2b193d;
+  font-size: 2.75rem;
+  line-height: 1.1;
+  margin: 0 0 0.5rem;
+}
+
+h2 {
+  color: #2b193d;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  margin: 0 0 0.75rem;
+}
+
+h3 {
+  color: #5b3a82;
+  font-size: 1.125rem;
+  margin: 1.5em 0 0.5em;
+}
+
+a {
+  color: #5b3a82;
+}
+
+a:hover,
+a:focus {
+  background-color: #f2b134;
+  color: #2b193d;
+}
+
+img,
+video {
+  height: auto;
+  max-width: 100%;
+}
+
+header {
+  background-color: #2b193d;
+  border-bottom: 0.25rem solid #f2b134;
+}
+
+nav {
+  overflow: hidden;
+  text-align: center;
+}
+
+nav ul {
+  display: inline-block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+}
+
+nav ul li {
+  float: left;
+}
+
+nav ul li a {
+  color: #ffffff;
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 1em 1.75em;
+  text-decoration: none;
+}
+
+nav ul li a:hover,
+nav ul li a:focus {
+  background-color: #5b3a82;
+  color: #f2b134;
+}
+
+#home .nav-home,
+#resume .nav-resume,
+#projects .nav-projects {
+  background-color: #f2b134;
+  color: #2b193d;
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 75rem;
+  overflow: hidden;
+  padding: 2.5rem 0 3.5rem;
+  width: 90%;
+}
+
+footer {
+  background-color: #2b193d;
+  clear: both;
+  color: #ffffff;
+  font-size: 0.875rem;
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+}
+
+#home main {
+  float: left;
+  width: 64%;
+}
+
+#home aside {
+  background-color: #ffffff;
+  border-top: 0.375rem solid #f2b134;
+  float: right;
+  overflow-wrap: break-word;
+  padding: 1.5rem 2rem 0.5rem;
+  width: 31%;
+}
+
+#home h1 {
+  font-size: 4rem;
+  letter-spacing: -0.02em;
+}
+
+#home .tagline {
+  color: #5b3a82;
+  font-size: 1.375rem;
+  font-style: italic;
+  margin: 0 0 2.5rem;
+}
+
+#home main section {
+  clear: both;
+  margin-bottom: 2.5rem;
+}
+
+#home .portrait {
+  border: 0.375rem solid #ffffff;
+  border-radius: 50%;
+  float: right;
+  margin: 0 0 1rem 1.5rem;
+  max-width: 220px;
+  width: 35%;
+}
+
+#home main ul {
+  list-style-type: square;
+  padding-left: 1.25em;
+}
+
+#home main ul li {
+  margin-bottom: 0.5em;
+}
+
+#home aside section {
+  margin-bottom: 2rem;
+}
+
+#home aside ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#home aside ul li {
+  border-bottom: 1px solid #ddd6e8;
+  padding: 0.6em 0;
+}
+
+#resume {
+  background-color: #d9d2e3;
+  min-width: 960px;
+}
+
+#resume .wrapper {
+  background-color: #ffffff;
+  box-shadow: 0 0.25rem 1.5rem rgba(43, 25, 61, 0.25);
+  margin: 2.5rem auto;
+  max-width: none;
+  padding: 3.5rem 4rem;
+  width: 960px;
+}
+
+#resume h1 {
+  font-size: 3rem;
+  text-align: center;
+}
+
+#resume .contact {
+  border-bottom: 0.125rem solid #2b193d;
+  list-style-type: none;
+  margin: 0 0 2.5rem;
+  padding: 0 0 1.5rem;
+  text-align: center;
+}
+
+#resume .contact li {
+  display: inline-block;
+  font-size: 0.9375rem;
+  margin: 0 0.75em;
+}
+
+#resume h2 {
+  border-left: 0.5rem solid #f2b134;
+  margin-top: 2.5rem;
+  padding-left: 0.75rem;
+}
+
+#resume section ul li {
+  margin-bottom: 0.35em;
+}
+
+#resume .job {
+  margin-bottom: 1.75rem;
+  position: relative;
+}
+
+#resume .job h3 {
+  margin: 0 0 0.5rem;
+  padding-right: 19rem;
+}
+
+#resume .job .meta {
+  color: #5b3a82;
+  font-style: italic;
+  margin: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+#projects .wrapper {
+  max-width: 70rem;
+  width: 86%;
+}
+
+#projects main > p {
+  font-size: 1.25rem;
+  max-width: 45em;
+}
+
+#projects h2 {
+  margin-bottom: 1rem;
+}
+
+#projects section {
+  background-color: #ffffff;
+  border-left: 0.5rem solid #5b3a82;
+  margin: 2.5rem 0;
+  overflow: hidden;
+  padding: 2rem 4%;
+}
+
+#projects video {
+  background-color: #211c2b;
+  float: right;
+  margin: 0 0 1rem 4%;
+  width: 46%;
+}
+
+#projects figure {
+  float: left;
+  margin: 0 4% 1.5rem 0;
+  width: 48%;
+}
+
+#projects figure + figure {
+  margin-right: 0;
+}
+
+#projects figure img {
+  border: 1px solid #ddd6e8;
+  display: block;
+  width: 100%;
+}
+
+#projects figcaption {
+  font-size: 0.875rem;
+  font-style: italic;
+  padding-top: 0.4em;
+  text-align: center;
+}
+
+#projects h3 {
+  clear: both;
+}
+
+#projects .tech {
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+#projects .tech li {
+  background-color: #f4f1f8;
+  border: 1px solid #ddd6e8;
+  float: left;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.875rem;
+  margin: 0 0.5em 0.5em 0;
+  padding: 0.3em 0.8em;
+}
+
+@media screen and (max-width: 48em) {
+  nav ul li a {
+    padding: 1em;
+  }
+
+  #home main,
+  #home aside {
+    float: none;
+    width: auto;
+  }
+
+  #home h1 {
+    font-size: 2.75rem;
+  }
+
+  #projects video,
+  #projects figure {
+    float: none;
+    margin: 0 0 1.5rem;
+    width: 100%;
+  }
+}

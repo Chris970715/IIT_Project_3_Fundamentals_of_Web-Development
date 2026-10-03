@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gyubum Kim - Projects</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&amp;display=swap">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body id="projects">
+    <header>
+      <nav>
+        <ul>
+          <li><a class="nav-home" href="index.html">Home</a></li>
+          <li><a class="nav-resume" href="resume.html">Resume</a></li>
+          <li><a class="nav-projects" href="page3.html">Projects</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="wrapper">
+      <main>
+        <h1>Projects</h1>
+        <p>A selection of products I have built or co-founded. Each one taught me something different about shipping software that real users depend on.</p>
+        <section>
+          <h2>Grapoll &ndash; AI Research Platform</h2>
+          <p>Grapoll is a polling platform paired with an AI research workflow that generates and reviews research reports. I co-founded the project and built the backend.</p>
+          <h3>What I Built</h3>
+          <ul>
+            <li>A multi-agent AI research workflow using LangGraph, GPT-4o, Stanford STORM, and CRAG methodologies</li>
+            <li>Over 40 REST APIs, stateless JWT authentication, and six interactive voting systems</li>
+            <li>An automated AI quality review pipeline that combines rule-based validation with LLM scoring</li>
+            <li>OpenAPI code generation that keeps the TypeScript frontend in sync with backend schemas</li>
+            <li>Anti-fraud systems: VPN detection, device fingerprinting, rate limiting, and identity verification</li>
+            <li>XSS protection through DOMPurify sanitization and secure markdown rendering</li>
+          </ul>
+          <h3>Technologies</h3>
+          <ul class="tech">
+            <li>LangGraph, GPT-4o, Stanford STORM, CRAG</li>
+            <li>REST APIs, JWT authentication, OpenAPI</li>
+            <li>TypeScript, DOMPurify</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Ordinals Play</h2>
+          <video controls src="media/ordinals-play.mp4">
+              Your browser does not support the video element. <a href="media/ordinals-play.mp4">Download the video</a> instead.
+            </video>
+          <p>Ordinals Play is a real-time multiplayer game built in Unity where owning a Bitcoin Ordinals NFT unlocks in-game assets. As co-founder and software developer, I built the networking layer, the ownership verification API, and the official website.</p>
+          <h3>What I Built</h3>
+          <ul>
+            <li>A real-time multiplayer networking system in Unity using Photon, supporting over 6,300 registered players</li>
+            <li>A Node.js REST API that verifies Bitcoin Ordinals NFT ownership through JSON-RPC</li>
+            <li>The official React website with wallet integration, NFT galleries, and partnership management</li>
+            <li>Multiplayer synchronization, matchmaking, and room management that eliminated reported desynchronization</li>
+          </ul>
+          <h3>Results</h3>
+          <ul>
+            <li>Grew organically to more than 6,300 users without paid advertising</li>
+            <li>Secured partnerships with more than 50 NFT communities</li>
+          </ul>
+        </section>
+        <section>
+          <h2>AbleBridge Platform</h2>
+          <figure>
+            <img src="media/ablebridge-dashboard.png" alt="Screenshot of the AbleBridge platform">
+            <figcaption>AbleBridge homepage</figcaption>
+          </figure>
+          <figure>
+            <img src="media/ablebridge-course2.png" alt="Screenshot of the AbleBridge course page">
+            <figcaption>AbleBridge course page</figcaption>
+          </figure>
+          <video controls src="media/ablebridge.mp4">
+            Your browser does not support the video element. <a href="media/ablebridge.mp4">Download the video</a> instead.
+          </video>
+          <p>As a software developer at AbleBridge (Sep 2025 &ndash; Mar 2026), I worked across the stack on a production web application, from the database and API layer to authentication and cloud delivery.</p>
+          <h3>What I Built</h3>
+          <ul>
+            <li>Scalable REST APIs with NestJS, Prisma, and PostgreSQL: over 20 production-ready endpoints with DTO validation and Swagger documentation</li>
+            <li>A full-stack application on Next.js 16 and React 19 with reusable authentication architecture, Server Actions, and role-based access control</li>
+            <li>A stateless JWT authentication system using NextAuth v5 and Passport.js that removed database lookups while securing OAuth workflows</li>
+            <li>An AWS S3 media upload pipeline for files up to 5GB, delivered through CloudFront with JWT-protected endpoints</li>
+            <li>Dockerized backend services with multi-stage builds and automated Prisma client generation</li>
+          </ul>
+          <h3>Technologies</h3>
+          <ul class="tech">
+            <li>NestJS, Prisma, PostgreSQL, Swagger</li>
+            <li>Next.js 16, React 19, NextAuth v5, Passport.js</li>
+            <li>AWS S3, CloudFront, Docker</li>
+          </ul>
+        </section>
+        <section>
+          <h2>This Website</h2>
+          <p>This site is Project 1 for my web development course. It is written from scratch in raw HTML with no CSS, no frameworks, and no pre-built code, and every page passes the W3C HTML validator. Later projects will add CSS styling and JavaScript to these same pages.</p>
+        </section>
+      </main>
+    </div>
+    <footer>
+      <p>&copy; 2026 Gyubum Kim</p>
+    </footer>
+  </body>
+</html>
