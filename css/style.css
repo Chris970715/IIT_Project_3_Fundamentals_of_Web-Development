@@ -361,3 +361,35 @@ footer p {
     margin-right: 0;
   }
 }
+
+/* Desktop: 64em (1024px) and wider */
+@media screen and (min-width: 64em) {
+  nav ul li a {
+    padding: 1em 1.75em;
+  }
+
+  #home main {
+    float: left;
+    width: 64%;
+  }
+
+  #home aside {
+    float: right;
+    margin-top: 0;
+    width: 31%;
+  }
+
+  #home h1 {
+    font-size: 4rem;
+    letter-spacing: -0.02em;
+  }
+
+  #home .tagline {
+    font-size: 1.375rem;
+    margin-bottom: 2.5rem;
+  }
+
+  #home main section {
+    margin-bottom: 2.5rem;
+  }
+}
