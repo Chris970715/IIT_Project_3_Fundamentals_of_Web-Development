@@ -37,7 +37,61 @@ function markCurrentNavLink() {
 }
 
 // ---------------------------------------------------------------
+// Map page: Google Maps JavaScript API
+// ---------------------------------------------------------------
+
+function showMapError(mapElement, error) {
+  const message = document.createElement('p');
+
+  console.warn('The map could not be loaded:', error.message);
+  message.className = 'map-message';
+  message.textContent = 'Sorry, the map could not be loaded right now. The places are listed below.';
+  mapElement.textContent = '';
+  mapElement.append(message);
+}
+
+async function buildMap(mapElement) {
+  if (!window.google || !window.google.maps || !window.google.maps.importLibrary) {
+    throw new Error('the Google Maps script did not load');
+  }
+
+  const { Map } = await google.maps.importLibrary('maps');
+
+  // Remove the "map appears here" message before Google draws the map
+  mapElement.textContent = '';
+
+  // Base code: a map with a center and a zoom level (read from #map)
+  const map = new Map(mapElement, {
+    center: {
+      lat: Number(mapElement.dataset.lat),
+      lng: Number(mapElement.dataset.lng)
+    },
+    zoom: Number(mapElement.dataset.zoom)
+  });
+
+  return map;
+}
+
+function initMapPage() {
+  const mapElement = document.getElementById('map');
+
+  if (!mapElement) {
+    return;
+  }
+
+  // Google calls this global function if it rejects the API key
+  window.gm_authFailure = () => {
+    showMapError(mapElement, new Error('Google Maps rejected the API key'));
+  };
+
+  buildMap(mapElement).catch((error) => {
+    showMapError(mapElement, error);
+  });
+}
+
+// ---------------------------------------------------------------
 // Start-up
 // ---------------------------------------------------------------
 updateCopyrightYear();
 markCurrentNavLink();
+initMapPage();
