@@ -7,6 +7,15 @@
   "defer" attribute, so it runs only after the HTML has been parsed.
   Every feature first checks that the elements it needs exist, so a
   page without them never throws an error.
+
+  Google Map (map.html) - features added beyond the base code:
+    1. Numbered pins in the site's colours, one for each listed place
+    2. Info windows that open when a pin is clicked, tapped, or
+       selected with the keyboard
+    3. A circle that shades the Greater Toronto Area
+    4. "Show on map" buttons in the place list, plus a
+       "Show all places" button, that move the map
+    5. Customized controls and phone-friendly gesture handling
 */
 
 // ---------------------------------------------------------------
@@ -124,7 +133,7 @@ async function buildMap(mapElement, places) {
   ]);
   const { Map, InfoWindow, Circle } = mapsLibrary;
   const { AdvancedMarkerElement, PinElement } = markerLibrary;
-  const { LatLngBounds } = coreLibrary;
+  const { ControlPosition, LatLngBounds } = coreLibrary;
 
   // Remove the "map appears here" message before Google draws the map
   mapElement.textContent = '';
@@ -136,7 +145,15 @@ async function buildMap(mapElement, places) {
       lng: Number(mapElement.dataset.lng)
     },
     zoom: Number(mapElement.dataset.zoom),
-    mapId: 'DEMO_MAP_ID' // Google's test map ID, required for advanced markers
+    mapId: 'DEMO_MAP_ID', // Google's test map ID, required for advanced markers
+
+    // Feature 5: customized controls and gestures
+    gestureHandling: 'cooperative', // on phones, one finger scrolls the page
+    streetViewControl: false,
+    minZoom: 4,
+    mapTypeControlOptions: {
+      position: ControlPosition.BLOCK_END_INLINE_CENTER
+    }
   });
 
   const infoWindow = new InfoWindow();
