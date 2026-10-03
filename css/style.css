@@ -100,7 +100,8 @@ nav ul li a:focus {
 
 #home .nav-home,
 #resume .nav-resume,
-#projects .nav-projects {
+#projects .nav-projects,
+#location .nav-map {
   background-color: #f2b134;
   color: #2b193d;
 }
@@ -310,6 +311,106 @@ footer p {
   font-size: 0.875rem;
   margin: 0 0.5em 0.5em 0;
   padding: 0.3em 0.8em;
+}
+
+#location .intro {
+  font-size: 1.125rem;
+  max-width: 45em;
+}
+
+#map {
+  background-color: #ddd6e8;
+  border: 0.375rem solid #2b193d;
+  height: 26rem;
+  margin: 1.5rem auto 1rem;
+  max-width: 60rem;
+}
+
+#map .map-message {
+  margin: 0;
+  padding: 2rem;
+  text-align: center;
+}
+
+.map-actions {
+  margin: 0 auto 2.5rem;
+  max-width: 60rem;
+  text-align: center;
+}
+
+#location button {
+  background-color: #2b193d;
+  border: 0;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: "Chakra Petch", "Trebuchet MS", sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0.6em 1.2em;
+}
+
+#location button:hover,
+#location button:focus {
+  background-color: #f2b134;
+  color: #2b193d;
+}
+
+.place-list {
+  counter-reset: place;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.place-list li {
+  background-color: #ffffff;
+  border-left: 0.5rem solid #5b3a82;
+  counter-increment: place;
+  margin-bottom: 1rem;
+  padding: 1.25rem 1.5rem 1.25rem 4.25rem;
+  position: relative;
+}
+
+.place-list li::before {
+  background-color: #5b3a82;
+  border-radius: 50%;
+  color: #f2b134;
+  content: counter(place);
+  font-family: "Chakra Petch", "Trebuchet MS", sans-serif;
+  font-weight: 700;
+  height: 2rem;
+  left: 1.25rem;
+  line-height: 2rem;
+  position: absolute;
+  text-align: center;
+  top: 1.25rem;
+  width: 2rem;
+}
+
+.place-list li.is-active {
+  border-left-color: #f2b134;
+  box-shadow: 0 0.25rem 1rem rgba(43, 25, 61, 0.2);
+}
+
+.place-list h3 {
+  margin: 0 0 0.25rem;
+}
+
+.place-list p {
+  margin: 0 0 0.75rem;
+}
+
+.info-window-title {
+  color: #2b193d;
+  font-family: "Chakra Petch", "Trebuchet MS", sans-serif;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}
+
+.info-window-text {
+  margin: 0;
+  max-width: 16rem;
 }
 
 /* Mobile-first media queries: the styles above are for small screens.
