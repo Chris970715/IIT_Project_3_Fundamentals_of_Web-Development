@@ -46,7 +46,8 @@ function markCurrentNavLink() {
 const MAP_COLORS = {
   pin: '#5b3a82',
   pinBorder: '#2b193d',
-  pinNumber: '#f2b134'
+  pinNumber: '#f2b134',
+  area: '#f2b134'
 };
 
 // Turn each <li> in the place list into a place object
@@ -101,7 +102,7 @@ async function buildMap(mapElement, places) {
     google.maps.importLibrary('maps'),
     google.maps.importLibrary('marker')
   ]);
-  const { Map, InfoWindow } = mapsLibrary;
+  const { Map, InfoWindow, Circle } = mapsLibrary;
   const { AdvancedMarkerElement, PinElement } = markerLibrary;
 
   // Remove the "map appears here" message before Google draws the map
@@ -151,6 +152,20 @@ async function buildMap(mapElement, places) {
     place.marker.addEventListener('gmp-click', () => {
       selectPlace(place);
     });
+
+    // Feature 3: shade an area for places that have a data-radius
+    if (place.radius > 0) {
+      place.circle = new Circle({
+        map: map,
+        center: place.position,
+        radius: place.radius,
+        clickable: false,
+        fillColor: MAP_COLORS.area,
+        fillOpacity: 0.15,
+        strokeColor: MAP_COLORS.area,
+        strokeWeight: 2
+      });
+    }
   });
 
   return map;
