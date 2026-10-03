@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gyubum Kim - Map</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&amp;display=swap">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body id="location">
+    <header>
+      <nav>
+        <ul>
+          <li><a class="nav-home" href="index.html">Home</a></li>
+          <li><a class="nav-resume" href="resume.html">Resume</a></li>
+          <li><a class="nav-projects" href="page3.html">Projects</a></li>
+          <li><a class="nav-map" href="map.html">Map</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="wrapper">
+      <main>
+        <h1>Where I Work and Study</h1>
+        <p class="intro">My work and studies span the Greater Toronto Area and Chicago. Select a numbered pin to read about a place, or use the buttons in the list below the map to jump straight to it.</p>
+        <div id="map" data-lat="43.70" data-lng="-79.52" data-zoom="9" role="region" aria-label="Map of the places where I work and study">
+          <p class="map-message">The interactive map appears here when JavaScript is enabled. The same places are listed below.</p>
+        </div>
+        <section class="places">
+          <h2>Places on This Map</h2>
+          <ol class="place-list">
+            <li data-lat="43.5889" data-lng="-79.6424" data-zoom="12">
+              <h3>Mississauga, Ontario</h3>
+              <p>Home base. I live in Mississauga and work across the Greater Toronto Area.</p>
+            </li>
+            <li data-lat="43.6900" data-lng="-79.4800" data-zoom="9" data-radius="35000">
+              <h3>Wireless DNA Inc. &ndash; Greater Toronto Area</h3>
+              <p>Network / IT Generalist since September 2023, supporting the networks and devices of retail stores across the area shaded on the map.</p>
+            </li>
+            <li data-lat="43.7956" data-lng="-79.3494" data-zoom="15">
+              <h3>Seneca Polytechnic &ndash; Newnham Campus</h3>
+              <p>Advanced Diploma in Computer Engineering Technology, graduated 2023.</p>
+            </li>
+            <li data-lat="41.8351" data-lng="-87.6271" data-zoom="15">
+              <h3>Illinois Institute of Technology &ndash; Mies Campus</h3>
+              <p>Bachelor of Information Technology in Cloud Computing, studying online; expected graduation May 2027.</p>
+            </li>
+          </ol>
+        </section>
+      </main>
+    </div>
+    <footer>
+      <p>&copy; 2026 Gyubum Kim</p>
+    </footer>
+  </body>
+</html>
