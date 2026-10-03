@@ -38,7 +38,49 @@ function markCurrentNavLink() {
 
 // ---------------------------------------------------------------
 // Map page: Google Maps JavaScript API
+//
+// The places come from the list in map.html (data-lat, data-lng,
+// data-zoom, and an optional data-radius in metres), so the page
+// still shows every place if JavaScript or the map is unavailable.
 // ---------------------------------------------------------------
+const MAP_COLORS = {
+  pin: '#5b3a82',
+  pinBorder: '#2b193d',
+  pinNumber: '#f2b134'
+};
+
+// Turn each <li> in the place list into a place object
+function readPlaces() {
+  const listItems = document.querySelectorAll('.place-list li');
+
+  return Array.from(listItems).map((item, index) => ({
+    item: item,
+    number: String(index + 1),
+    name: item.querySelector('h3').textContent,
+    details: item.querySelector('p').textContent,
+    position: {
+      lat: Number(item.dataset.lat),
+      lng: Number(item.dataset.lng)
+    },
+    zoom: Number(item.dataset.zoom) || 14,
+    radius: Number(item.dataset.radius) || 0
+  }));
+}
+
+// Build info window content with DOM methods instead of HTML strings
+function createInfoContent(place) {
+  const box = document.createElement('div');
+  const title = document.createElement('p');
+  const text = document.createElement('p');
+
+  title.className = 'info-window-title';
+  title.textContent = place.name;
+  text.className = 'info-window-text';
+  text.textContent = place.details;
+  box.append(title, text);
+
+  return box;
+}
 
 function showMapError(mapElement, error) {
   const message = document.createElement('p');
@@ -50,12 +92,17 @@ function showMapError(mapElement, error) {
   mapElement.append(message);
 }
 
-async function buildMap(mapElement) {
+async function buildMap(mapElement, places) {
   if (!window.google || !window.google.maps || !window.google.maps.importLibrary) {
     throw new Error('the Google Maps script did not load');
   }
 
-  const { Map } = await google.maps.importLibrary('maps');
+  const [mapsLibrary, markerLibrary] = await Promise.all([
+    google.maps.importLibrary('maps'),
+    google.maps.importLibrary('marker')
+  ]);
+  const { Map, InfoWindow } = mapsLibrary;
+  const { AdvancedMarkerElement, PinElement } = markerLibrary;
 
   // Remove the "map appears here" message before Google draws the map
   mapElement.textContent = '';
@@ -66,7 +113,44 @@ async function buildMap(mapElement) {
       lat: Number(mapElement.dataset.lat),
       lng: Number(mapElement.dataset.lng)
     },
-    zoom: Number(mapElement.dataset.zoom)
+    zoom: Number(mapElement.dataset.zoom),
+    mapId: 'DEMO_MAP_ID' // Google's test map ID, required for advanced markers
+  });
+
+  const infoWindow = new InfoWindow();
+
+  // Open the info window for a place and highlight it in the list
+  function selectPlace(place) {
+    infoWindow.setContent(createInfoContent(place));
+    infoWindow.open({ map: map, anchor: place.marker });
+
+    places.forEach((otherPlace) => {
+      otherPlace.item.classList.toggle('is-active', otherPlace === place);
+    });
+  }
+
+  places.forEach((place) => {
+    // Feature 1: numbered pins in the site's colours
+    const pin = new PinElement({
+      background: MAP_COLORS.pin,
+      borderColor: MAP_COLORS.pinBorder,
+      glyphColor: MAP_COLORS.pinNumber,
+      glyphText: place.number,
+      scale: 1.2
+    });
+
+    place.marker = new AdvancedMarkerElement({
+      map: map,
+      position: place.position,
+      title: place.name,
+      gmpClickable: true
+    });
+    place.marker.append(pin);
+
+    // Feature 2: info window on click, tap, or Enter key
+    place.marker.addEventListener('gmp-click', () => {
+      selectPlace(place);
+    });
   });
 
   return map;
@@ -74,8 +158,9 @@ async function buildMap(mapElement) {
 
 function initMapPage() {
   const mapElement = document.getElementById('map');
+  const places = readPlaces();
 
-  if (!mapElement) {
+  if (!mapElement || places.length === 0) {
     return;
   }
 
@@ -84,7 +169,7 @@ function initMapPage() {
     showMapError(mapElement, new Error('Google Maps rejected the API key'));
   };
 
-  buildMap(mapElement).catch((error) => {
+  buildMap(mapElement, places).catch((error) => {
     showMapError(mapElement, error);
   });
 }
