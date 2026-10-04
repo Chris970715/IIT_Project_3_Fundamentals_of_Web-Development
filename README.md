@@ -8,7 +8,7 @@ Live site: https://chris970715.github.io/IIT_Project_3_Fundamentals_of_Web-Devel
 
 - `index.html` - Home. The mobile-friendly page: mobile-first base styles plus two `min-width` media queries (40em and 64em).
 - `resume.html` - Resume. Fixed-width layout.
-- `page3.html` - Projects. Fluid layout.
+- `page3.html` - Projects. Fluid layout, with the picture slider in the Ordinals Play section.
 - `map.html` - Map. Google Maps JavaScript API.
 
 ## Files
@@ -24,3 +24,10 @@ Live site: https://chris970715.github.io/IIT_Project_3_Fundamentals_of_Web-Devel
 3. A circle that shades the Greater Toronto Area
 4. "Show on map" and "Show all places" buttons that move the map
 5. Customized controls and phone-friendly gesture handling
+
+## Picture slider (page3.html)
+
+- Shows one Ordinals Play screenshot at a time; without JavaScript, all screenshots are shown in a column
+- Previous and Next buttons, a picture counter, and one dot per picture
+- Left and right arrow keys, and swiping on touch screens
+- Fade between pictures, turned off for visitors who prefer reduced motion
