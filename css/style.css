@@ -329,6 +329,82 @@ footer p {
   padding: 0.3em 0.8em;
 }
 
+.slider {
+  margin-bottom: 1rem;
+}
+
+#projects .slide {
+  float: none;
+  margin: 0 0 1rem;
+  width: auto;
+}
+
+#projects .slide img {
+  border: 0;
+}
+
+#projects .slide figcaption {
+  background-color: #2b193d;
+  color: #ffffff;
+  font-size: 0.9375rem;
+  font-style: normal;
+  padding: 0.6em 1em;
+  text-align: left;
+}
+
+.slide.is-current {
+  animation: slide-fade 0.45s ease-out;
+}
+
+.no-motion .slide.is-current {
+  animation: none;
+}
+
+@keyframes slide-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.slider-controls {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.slider-status {
+  color: #5b3a82;
+  font-family: "Chakra Petch", "Trebuchet MS", sans-serif;
+  font-weight: 700;
+  margin: 0;
+}
+
+.slider-dots {
+  margin: 0.75rem 0 0;
+  text-align: center;
+}
+
+.slider-dot {
+  background-color: #ddd6e8;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 0.875rem;
+  margin: 0 0.3rem;
+  padding: 0;
+  width: 0.875rem;
+}
+
+.slider-dot:hover,
+.slider-dot:focus,
+.slider-dot[aria-current="true"] {
+  background-color: #f2b134;
+}
+
 #location .intro {
   font-size: 1.125rem;
   max-width: 45em;
@@ -354,7 +430,8 @@ footer p {
   text-align: center;
 }
 
-#location button {
+#location button,
+.slider-controls button {
   background-color: #2b193d;
   border: 0;
   color: #ffffff;
@@ -367,7 +444,9 @@ footer p {
 }
 
 #location button:hover,
-#location button:focus {
+#location button:focus,
+.slider-controls button:hover,
+.slider-controls button:focus {
   background-color: #f2b134;
   color: #2b193d;
 }
