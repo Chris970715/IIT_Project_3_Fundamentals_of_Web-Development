@@ -1,3 +1,4 @@
+/* jshint esversion: 11, browser: true, devel: true, strict: global */
 'use strict';
 
 /*
@@ -127,9 +128,9 @@ async function buildMap(mapElement, places) {
   }
 
   const [mapsLibrary, markerLibrary, coreLibrary] = await Promise.all([
-    google.maps.importLibrary('maps'),
-    google.maps.importLibrary('marker'),
-    google.maps.importLibrary('core')
+    window.google.maps.importLibrary('maps'),
+    window.google.maps.importLibrary('marker'),
+    window.google.maps.importLibrary('core')
   ]);
   const { Map, InfoWindow, Circle } = mapsLibrary;
   const { AdvancedMarkerElement, PinElement } = markerLibrary;
