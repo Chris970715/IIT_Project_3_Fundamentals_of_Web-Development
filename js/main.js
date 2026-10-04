@@ -18,6 +18,10 @@
     4. "Show on map" buttons in the place list, plus a
        "Show all places" button, that move the map
     5. Customized controls and phone-friendly gesture handling
+
+  Picture slider (page3.html): shows one Ordinals Play screenshot at
+  a time, with Previous/Next buttons, a counter, one dot per picture,
+  arrow-key support, and swiping on touch screens.
 */
 
 // ---------------------------------------------------------------
@@ -45,6 +49,103 @@ function markCurrentNavLink() {
       link.setAttribute('aria-current', 'page');
     }
   });
+}
+
+// ---------------------------------------------------------------
+// Projects page: picture slider
+//
+// Without JavaScript every screenshot is shown in a column. This
+// shows one at a time and adds the controls described at the top.
+// ---------------------------------------------------------------
+const SWIPE_DISTANCE = 40; // pixels a finger must move to change slides
+
+function initSlider() {
+  const slider = document.querySelector('.slider');
+
+  if (!slider) {
+    return;
+  }
+
+  const slides = Array.from(slider.querySelectorAll('.slide'));
+
+  if (slides.length < 2) {
+    return;
+  }
+
+  const controls = document.createElement('div');
+  const status = document.createElement('p');
+  const dots = document.createElement('div');
+  let current = 0;
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  // Show one slide (wrapping around at both ends) and update the controls
+  function showSlide(index) {
+    current = (index + slides.length) % slides.length;
+
+    slides.forEach((slide, slideIndex) => {
+      const isCurrent = slideIndex === current;
+
+      slide.hidden = !isCurrent;
+      slide.classList.toggle('is-current', isCurrent);
+      dots.children[slideIndex].setAttribute('aria-current', String(isCurrent));
+    });
+
+    status.textContent = `${current + 1} / ${slides.length}`;
+  }
+
+  // Previous and Next buttons with the counter between them
+  controls.className = 'slider-controls';
+  status.className = 'slider-status';
+  status.setAttribute('aria-live', 'polite');
+  controls.append(
+    createButton('\u2039 Previous', () => showSlide(current - 1)),
+    status,
+    createButton('Next \u203A', () => showSlide(current + 1))
+  );
+
+  // One dot per picture that jumps straight to it
+  dots.className = 'slider-dots';
+  slides.forEach((slide, slideIndex) => {
+    const dot = createButton('', () => showSlide(slideIndex));
+
+    dot.className = 'slider-dot';
+    dot.setAttribute('aria-label', `Show picture ${slideIndex + 1} of ${slides.length}`);
+    dots.append(dot);
+  });
+
+  // Arrow keys work once the slider or one of its buttons has focus
+  slider.tabIndex = 0;
+  slider.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') {
+      showSlide(current - 1);
+    } else if (event.key === 'ArrowRight') {
+      showSlide(current + 1);
+    }
+  });
+
+  // Swipe left or right on touch screens
+  slider.addEventListener('touchstart', (event) => {
+    touchStartX = event.changedTouches[0].clientX;
+    touchStartY = event.changedTouches[0].clientY;
+  }, { passive: true });
+
+  slider.addEventListener('touchend', (event) => {
+    const distanceX = event.changedTouches[0].clientX - touchStartX;
+    const distanceY = event.changedTouches[0].clientY - touchStartY;
+
+    if (Math.abs(distanceX) > SWIPE_DISTANCE && Math.abs(distanceX) > Math.abs(distanceY)) {
+      showSlide(distanceX < 0 ? current + 1 : current - 1);
+    }
+  });
+
+  // No fade animation for people who ask their device for reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    slider.classList.add('no-motion');
+  }
+
+  slider.append(controls, dots);
+  showSlide(0);
 }
 
 // ---------------------------------------------------------------
@@ -272,3 +373,4 @@ function initMapPage() {
 // ---------------------------------------------------------------
 updateCopyrightYear();
 markCurrentNavLink();
+initSlider();
