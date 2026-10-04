@@ -1,4 +1,5 @@
 /* jshint esversion: 11, browser: true, devel: true, strict: global */
+/* exported initMapPage */
 'use strict';
 
 /*
@@ -247,6 +248,7 @@ async function buildMap(mapElement, places) {
   return map;
 }
 
+// Google calls initMapPage once the Maps API has loaded (callback= in map.html)
 function initMapPage() {
   const mapElement = document.getElementById('map');
   const places = readPlaces();
@@ -270,4 +272,3 @@ function initMapPage() {
 // ---------------------------------------------------------------
 updateCopyrightYear();
 markCurrentNavLink();
-initMapPage();
